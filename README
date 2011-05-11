@@ -1,6 +1,6 @@
 SpreeGestpay
 ==============
-by Matteo Folin - f5lab.com - Maggio 2011
+by Matteo Folin <matteo.folin@gmail.com> <info@f5lab.com> - http://f5lab.com - Maggio 2011
 
 Spree extension for use GestPay of Banca Sella as BillingIntegration.
 
@@ -8,17 +8,30 @@ Use a modifyed RGestPay Copyright (C)2006 by Giovanni Intini <medlar@medlar.it> 
 
 Tested with Spree 0.50.2
 
+Config
+=======
+# add gem to Gemfile:
+	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git'
+
+# bundle
+	bundle install
+
+# Copies all assets (NOTE: This will be obsolete with Rails 3.1)
+	rake spree_gestpay:install:assets
+
+
 Settings:
 =======
+It manage test and live Gestpay accounts, just set server and login preferences in /admin/payment_methods/new.
 
-PaymentMethod data:
-	name: "Banca Sella Gestpay" or "Banca Sella Gestpay TEST" or "Banca Sella Gestpay LIVE" (for css)
+/admin/payment_methods:
+	name: "Banca Sella Gestpay" or "Banca Sella Gestpay TEST" or "Banca Sella Gestpay LIVE" (for css )
 	provider: BillingIntegration::Gestpay
 	server: test / live
 	login: codice esercente
 
-on https://testecomm.sella.it/GestPay/BackOffice/Menu.asp or https://ecomm.sella.it/GestPay/BackOffice/Menu.asp
-	ips: of your servers
+In Gestpay Backoffice, https://testecomm.sella.it/GestPay/BackOffice/Menu.asp or https://ecomm.sella.it/GestPay/BackOffice/Menu.asp, you must set these data:
+	ip: of your server
 	URL per risposta positiva: http://<your-domain>.it/gestpay/comeback
 	URL per risposta negativa: http://<your-domain>/gestpay/comeback
 	URL Server to Server: http://<your-domain>/gestpay/comeback_s2s/test or http://<your-domain>/gestpay/comeback_s2s/live
