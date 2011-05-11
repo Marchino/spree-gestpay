@@ -1,0 +1,27 @@
+SpreeGestpay
+==============
+by Matteo Folin - f5lab.com - Maggio 2011
+
+Spree extension for use GestPay of Banca Sella as BillingIntegration.
+
+Use a modifyed RGestPay Copyright (C)2006 by Giovanni Intini <medlar@medlar.it> as crypt/decrypt lib
+
+Tested with Spree 0.50.2
+
+Settings:
+=======
+
+PaymentMethod data:
+	name: "Banca Sella Gestpay" or "Banca Sella Gestpay TEST" or "Banca Sella Gestpay LIVE" (for css)
+	provider: BillingIntegration::Gestpay
+	server: test / live
+	login: codice esercente
+
+on https://testecomm.sella.it/GestPay/BackOffice/Menu.asp or https://ecomm.sella.it/GestPay/BackOffice/Menu.asp
+	ips: of your servers
+	URL per risposta positiva: http://<your-domain>.it/gestpay/comeback
+	URL per risposta negativa: http://<your-domain>/gestpay/comeback
+	URL Server to Server: http://<your-domain>/gestpay/comeback_s2s/test or http://<your-domain>/gestpay/comeback_s2s/live
+	
+
+Copyright (c) 2011 Matteo Folin - F5lab.com, released under the New BSD License

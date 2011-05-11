@@ -1,0 +1,29 @@
+<div class="clear"></div>
+<fieldset id='payment'>
+  <% form_tag @form_url do -%>
+
+  <h2>Pagamento tramite GestPay di Banca Sella <% if @server == "test" %>(server di TEST)<% end %></h2>
+	<div id="gestpay_logos">
+		<%= image_tag "sella_it.gif" %>
+		<% if @server == "test" %>
+			<%= image_tag "LOGOGESTPAYTEST.gif" %>
+		<% else %>
+			<%= image_tag "LOGOGESTPAY.gif" %>
+		<% end %>
+	</div>
+
+  <fieldset id="order_details">
+    <div class="clear"></div>
+    <legend>Riepilogo Ordine n.<%= @order.number %></legend>
+    <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+  </fieldset>
+ 
+	<%= hidden_field_tag 'a', @a %>
+	<%= hidden_field_tag 'b', @b %>
+
+	<%= submit_tag "Conferma il pagamento" %>
+	<p id="gestpay_description_text">Confermando verrete reindirizzati al sito di Banca Sella Gestpay.</p> 
+  <% end %>
+</fieldset>
+
+<%= link_to "Annulla e torna indietro", checkout_state_url(:payment), :class => "sarallo-link" %>
