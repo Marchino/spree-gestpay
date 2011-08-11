@@ -1,8 +1,8 @@
 <div class="clear"></div>
-<fieldset id='payment'>
+<fieldset id='payment' class='gestpay'>
   <% form_tag @form_url do -%>
 
-  <h2>Pagamento tramite GestPay di Banca Sella <% if @server == "test" %>(server di TEST)<% end %></h2>
+  <h2 class="title">Pagamento tramite GestPay di Banca Sella <% if @server == "test" %>(server di TEST)<% end %></h2>
 	<div id="gestpay_logos">
 		<%= image_tag "sella_it.gif" %>
 		<% if @server == "test" %>
@@ -26,4 +26,4 @@
   <% end %>
 </fieldset>
 
-<%= link_to "Annulla e torna indietro", checkout_state_url(:payment), :class => "sarallo-link" %>
+<%= link_to "Annulla e torna indietro", checkout_state_url(:payment), :class => "link cancel" %>
