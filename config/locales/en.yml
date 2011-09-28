@@ -1,0 +1,8 @@
+---
+en: 
+  payment_text: Payment by Banca Sella GestPay
+  payment_test: (TEST server)
+  order_summary: Summary order n.
+  confirm_payment: Confirm payment
+  confirm_msg: Confirming will be redirected to the site of Banca Sella Gestpay.
+  cancel_and_back: Cancel and go back

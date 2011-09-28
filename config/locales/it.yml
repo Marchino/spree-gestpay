@@ -1,0 +1,8 @@
+---
+it: 
+  payment_text: Pagamento tramite GestPay di Banca Sella
+  payment_test: (server di TEST)
+  order_summary: Riepilogo Ordine n.
+  confirm_payment: Conferma il pagamento
+  confirm_msg: Confermando verrete reindirizzati al sito di Banca Sella Gestpay.
+  cancel_and_back: Annulla e torna indietro

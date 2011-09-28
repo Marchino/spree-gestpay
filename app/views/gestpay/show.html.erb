@@ -2,7 +2,7 @@
 <fieldset id='payment' class='gestpay'>
   <% form_tag @form_url do -%>
 
-  <h2 class="title">Pagamento tramite GestPay di Banca Sella <% if @server == "test" %>(server di TEST)<% end %></h2>
+  <h2 class="title"><%= t(:payment_text) %> <% if @server == "test" %><%= t(:payment_test) %><% end %></h2>
 	<div id="gestpay_logos">
 		<%= image_tag "sella_it.gif" %>
 		<% if @server == "test" %>
@@ -14,16 +14,16 @@
 
   <fieldset id="order_details">
     <div class="clear"></div>
-    <legend>Riepilogo Ordine n.<%= @order.number %></legend>
+    <legend><%= t(:order_summary) %><%= @order.number %></legend>
     <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
   </fieldset>
  
 	<%= hidden_field_tag 'a', @a %>
 	<%= hidden_field_tag 'b', @b %>
 
-	<%= submit_tag "Conferma il pagamento" %>
-	<p id="gestpay_description_text">Confermando verrete reindirizzati al sito di Banca Sella Gestpay.</p> 
+	<%= submit_tag t(:confirm_payment) %>
+	<p id="gestpay_description_text"><%= t(:confirm_msg) %></p> 
   <% end %>
 </fieldset>
 
-<%= link_to "Annulla e torna indietro", checkout_state_url(:payment), :class => "gestpay link cancel" %>
+<%= link_to t(:cancel_and_back), checkout_state_url(:payment), :class => "gestpay link cancel" %>
