@@ -49,7 +49,7 @@ class GestpayController < Spree::BaseController
         # TODO : andrebbe in realtà accettato come pagamento ma senza conferma dell'avvenuta transazione ?
         redirect_to checkout_state_url(:payment)
       when "OK" # Esito transazione positivo
-        @order.payment.complete
+        #@order.payment.complete
         @order.next
         @order.save
         session[:order_id] = nil
@@ -71,9 +71,12 @@ class GestpayController < Spree::BaseController
     @server ||= "test"
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
-    if t[:shop_transaction_id] and Order.find_by_number t[:shop_transaction_id]
-      @order = Order.find_by_number t[:shop_transaction_id]
-      @order.payment.started_processing
+    if t[:shop_transaction_id] and Order.find_by_number t[:shop_transaction_id]  
+      logger.info "***GESTPAY***S2S*** comeback_s2s: #{t.inspect}"
+      @order = Order.find_by_number t[:shop_transaction_id]  
+      logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.inspect} #{@order.payment.inspect}"
+      @order.payment.started_processing  
+      logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
       case t[:transaction_result]
         when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
           @order.payment.pend
@@ -83,7 +86,8 @@ class GestpayController < Spree::BaseController
           @order.payment.fail
         else # Esito transazione indefinito
           #
-      end
+      end      
+      logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
     else
       raise "ERRORE, parametro ':shop_transaction_id' errato o assente, l'ordine number=#{t[:shop_transaction_id]} non esiste !"
     end
