@@ -39,7 +39,8 @@ class GestpayController < Spree::BaseController
   def comeback
     @a = params[:a]
     @b = params[:b]  
-    @order ||= current_order
+    @order ||= current_order            
+    @order.payment.started_processing
     @server = @order.payment_method.preferred_server
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
@@ -49,7 +50,7 @@ class GestpayController < Spree::BaseController
         # TODO : andrebbe in realtà accettato come pagamento ma senza conferma dell'avvenuta transazione ?
         redirect_to checkout_state_url(:payment)
       when "OK" # Esito transazione positivo
-        #@order.payment.complete
+        @order.payment.complete
         @order.next
         @order.save
         session[:order_id] = nil
