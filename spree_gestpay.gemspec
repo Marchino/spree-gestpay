@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.8.7'
 
   s.author            = 'Matteo Folin'
-  s.email             = 'info@f5lab.com'
+  s.email             = 'mfolin@f5lab.com'
   s.homepage          = 'http://f5lab.com'
   # s.rubyforge_project = 'actionmailer'
 
