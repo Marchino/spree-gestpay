@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_gestpay'
-  s.version     = '1.0.0'
+  s.version     = '1.1.0'
   s.summary     = 'Add gem summary here'
   s.description = 'Spree commerce extension for Gestpay by Banca Sella payment'
   s.required_ruby_version = '>= 1.8.7'
@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = true
 
-  s.add_dependency('spree_core', '>= 0.50.2')
+  s.add_dependency('spree_core', '>= 0.70.0')
 end
