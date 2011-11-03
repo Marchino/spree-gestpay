@@ -11,7 +11,10 @@ Tested with Spree 0.50.2, 0.60.4 e 0.70.1
 Config
 =======
 # add gem to Gemfile:
-	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git'
+	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git'   
+	
+	for Spree < 0.70.0 instead:
+	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git', :tag => 'v.1.0.0'
 
 # bundle
 	bundle install
