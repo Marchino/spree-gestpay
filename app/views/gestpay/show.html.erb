@@ -1,14 +1,14 @@
 <div class="clear"></div>
 <fieldset id='payment' class='gestpay'>
-  <% form_tag @form_url do -%>
+  <%= form_tag @form_url do -%>
 
   <h2 class="title"><%= t(:payment_text) %> <% if @server == "test" %><%= t(:payment_test) %><% end %></h2>
 	<div id="gestpay_logos">
-		<%= image_tag "sella_it.gif" %>
+		<%= image_tag "store/sella_it.gif" %>
 		<% if @server == "test" %>
-			<%= image_tag "LOGOGESTPAYTEST.gif" %>
+			<%= image_tag "store/LOGOGESTPAYTEST.gif" %>
 		<% else %>
-			<%= image_tag "LOGOGESTPAY.gif" %>
+			<%= image_tag "store/LOGOGESTPAY.gif" %>
 		<% end %>
 	</div>
 

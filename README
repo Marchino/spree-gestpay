@@ -19,7 +19,11 @@ Config
 # bundle
 	bundle install
 
-# Copies all assets (NOTE: This will be obsolete with Rails 3.1)
+# for Spree 0.70.x and "1.1.x"
+run the generator:
+  rails g spree_gestpay:install
+  
+# For older Spree and "1.0.0" copies all assets (NOTE: This will be obsolete with Rails 3.1)
 	rake spree_gestpay:install:assets
 
 
