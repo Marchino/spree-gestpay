@@ -6,7 +6,7 @@ Spree extension for use GestPay of Banca Sella as BillingIntegration.
 
 Use a modifyed RGestPay Copyright (C)2006 by Giovanni Intini <medlar@medlar.it> as crypt/decrypt lib
 
-Tested with Spree 0.50.2
+Tested with Spree 0.50.2, 0.60.4 e 0.70.1
 
 Config
 =======
