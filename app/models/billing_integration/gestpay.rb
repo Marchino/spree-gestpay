@@ -5,4 +5,8 @@ class BillingIntegration::Gestpay < BillingIntegration
   def provider_class
     ActiveMerchant::Billing::Integrations::Gestpay
   end
+   
+  def source_required?
+    false
+  end
 end
