@@ -39,9 +39,10 @@ It manage test and live Gestpay accounts, just set server and login preferences 
 
 In Gestpay Backoffice, https://testecomm.sella.it/GestPay/BackOffice/Menu.asp or https://ecomm.sella.it/GestPay/BackOffice/Menu.asp, you must set these data:
 	ip: of your server
-	URL per risposta positiva: https://your-domain/gestpay/comeback
-	URL per risposta negativa: https://your-domain/gestpay/comeback
-	URL Server to Server: https://your-domain/gestpay/comeback_s2s/test or https://your-domain/gestpay/comeback_s2s/live
+	URL per risposta positiva: https://your-domain/gestpay/comeback/test or https://your-domain/gestpay/comeback(/live)
+	URL per risposta negativa: https://your-domain/gestpay/comeback/test or https://your-domain/gestpay/comeback(/live)
+	URL Server to Server: https://your-domain/gestpay/comeback_s2s/test or https://your-domain/gestpay/comeback_s2s(/live)
+	The server param in paths is optional for live server, now is the default.
 	
 
 Copyright (c) 2011 Matteo Folin - F5lab.com, released under the New BSD License
