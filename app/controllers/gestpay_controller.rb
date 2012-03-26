@@ -39,12 +39,14 @@ class GestpayController < Spree::BaseController
   def comeback
     @a = params[:a]
     @b = params[:b]  
-    @order ||= current_order            
-    @order.payment.started_processing
-    @server = @order.payment_method.preferred_server
+    @server = params[:server]
+    @server ||= "live"
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
-    case t[:transaction_result]
+    @order = Order.find_by_number(t[:shop_transaction_id]) if t[:shop_transaction_id]
+    if t[:shop_transaction_id] and @order
+      @order.payment.started_processing
+      case t[:transaction_result]
       when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
         flash[:error] = "Esito transazione sospeso, bonifico. #{t[:transaction_result]}"
         # TODO : andrebbe in realtà accettato come pagamento ma senza conferma dell'avvenuta transazione ?
@@ -61,7 +63,11 @@ class GestpayController < Spree::BaseController
       else # Esito transazione indefinito
         flash[:error] = "Esito transazione indefinito (annullato) #{t[:transaction_result]}"
         redirect_to checkout_state_url(:payment)
-    end 
+      end 
+    else
+      flash[:error] = "C'è stato un errore nella ricezione dei parametri dal server Gestpay per cui non è possibile stabilire l'esito della transazione. Vi preghiamo di contattare il venditore per verificare lo stato del pagamento e confermare manualmente l'ordine."
+      redirect_to checkout_state_url(:payment)
+    end
   end
   
   # comeback server to server: conferma di pagamento
@@ -69,7 +75,7 @@ class GestpayController < Spree::BaseController
     @a = params[:a]
     @b = params[:b]
     @server = params[:server]
-    @server ||= "test"
+    @server ||= "live"
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
     if t[:shop_transaction_id] and Order.find_by_number t[:shop_transaction_id]  
