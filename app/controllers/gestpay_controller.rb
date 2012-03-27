@@ -46,6 +46,7 @@ class GestpayController < Spree::BaseController
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
     @order = Order.find_by_number(t[:shop_transaction_id]) if t[:shop_transaction_id]
+    logger.info "***GESTPAY***comeback*** Data in comeback: #{params} #{t} #{@order}"
     if t[:shop_transaction_id] and @order
       @order.payment.started_processing
       case t[:transaction_result]
@@ -80,6 +81,7 @@ class GestpayController < Spree::BaseController
     @server ||= "live"
     c = GestPay::CryptRequest.new(@a, @server)
     t = c.decrypt(@b)
+    logger.info "***GESTPAY***S2S*** Data in comeback_s2s: #{params} #{t} #{@order}"
     if t[:shop_transaction_id] and Order.find_by_number t[:shop_transaction_id]  
       logger.info "***GESTPAY***S2S*** comeback_s2s: #{t.inspect}"
       @order = Order.find_by_number t[:shop_transaction_id]  
@@ -94,7 +96,7 @@ class GestpayController < Spree::BaseController
         when "KO" # Esito transazione negativo
           @order.payment.fail
         else # Esito transazione indefinito
-          #
+          logger.info "***GESTPAY***S2S*** Esito transazione indefinito - comeback_s2s: #{params} #{t} #{@order}"
       end      
       logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
     else
