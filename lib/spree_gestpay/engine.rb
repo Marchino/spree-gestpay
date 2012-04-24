@@ -18,18 +18,18 @@ module SpreeGestpay
         Rails.application.config.cache_classes ? require(c) : load(c)
       end   
       
-      # register of Gestpay Banca Sella BillingIntegration
-      initializer "spree.register.payment_methods" do |app|
-        app.config.spree.payment_methods = [
-          BillingIntegration::Gestpay
-        ]
-      end
-      
       #require 'active_merchant'
       # register of Gestpay Banca Sella BillingIntegration
-      #BillingIntegration::Gestpay.register
-       
+      #BillingIntegration::Gestpay.register 
       #require 'rgestpay/lib/gest_pay'
+      # register of Gestpay Banca Sella BillingIntegration
+      #initializer "spree.register.payment_methods" do |app|
+      #  app.config.spree.payment_methods << BillingIntegration::Gestpay
+      #end    
+      config.after_initialize do |app|
+        app.config.spree.payment_methods += [ BillingIntegration::Gestpay ]
+      end
+      
     end
 
     config.to_prepare &method(:activate).to_proc
