@@ -41,7 +41,8 @@ module GestPay
         begin
           response = post_ssl(encrypt_url(transaction_data))
           TransactionData.new(parse_encryption_response(response.body)) if response.body
-        rescue
+        rescue Exception => e     
+          logger.error "Errore in encrypt (#{e})"
           TransactionData.new :error_code => 9999, :error_description => "Connection Error"          
         end
       elsif @shop_login.size == 0
@@ -56,7 +57,8 @@ module GestPay
         begin
           response = post_ssl(decrypt_url(string))
           TransactionData.new(parse_decryption_response(response.body)) if response.body
-        rescue
+        rescue Exception => e    
+          logger.error "Errore in decrypt (#{e})" 
           TransactionData.new :error_code => 9999, :error_description => "Connection Error"          
         end
       else
