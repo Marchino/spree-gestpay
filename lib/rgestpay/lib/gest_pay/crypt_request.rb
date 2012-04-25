@@ -100,7 +100,17 @@ module GestPay
     def post_ssl(url)
       domain = @server == 'test' ? DOMAIN_NAME_TEST : DOMAIN_NAME
       site = Net::HTTP.new(domain, 443)
-      site.use_ssl = true
+      site.use_ssl = true            
+      # BEGIN patch for openssl 1.0.1
+      site.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      # openssl 1.0.1 tends to produce long headers which gc doesnt handle
+      # reduce set of ciphers to the one that's known to work with 1.0.0h
+      # http://gursevkalra.blogspot.de/2009/09/ruby-and-openssl-based-ssl-cipher.html
+      site.ciphers = 'RC4-SHA'
+      # force ssl context to TLSv1/SSLv3
+      # http://www.ruby-forum.com/topic/200072
+      site.instance_eval { @ssl_context = OpenSSL::SSL::SSLContext.new(:TLSv1) } 
+      # END patch for openssl 1.0.1           
       site.get2(url)
     end
 
