@@ -6,12 +6,14 @@ Spree extension for use GestPay of Banca Sella as BillingIntegration.
 
 Use a modifyed RGestPay Copyright (C)2006 by Giovanni Intini <medlar@medlar.it> as crypt/decrypt lib
 
-Tested with Spree 0.50.2, 0.60.4 e 0.70.1
+Tested with Spree 0.50.2, 0.60.4 e 0.70.1, 1.3
 
 Config
 =======
 # add gem to Gemfile:
-	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git'   
+	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git', :branch => "1-3-stable"
+
+  ....
 	
 	for Spree < 0.70.0 instead:
 	gem "spree_gestpay", :git => 'git://github.com/matteofuzz/spree-gestpay.git', :tag => 'v.1.0.0'
