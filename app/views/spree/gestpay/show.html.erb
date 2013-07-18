@@ -15,7 +15,7 @@
   <fieldset id="order_details">
     <div class="clear"></div>
     <legend><%= t(:order_summary) %><%= @order.number %></legend>
-    <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+    <%= render :partial => 'spree/shared/order_details', :locals => {:order => @order} -%>
   </fieldset>
  
 	<%= hidden_field_tag 'a', @a %>

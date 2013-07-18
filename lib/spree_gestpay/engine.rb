@@ -1,6 +1,7 @@
+module Spree::Gestpay; end
 module SpreeGestpay
   class Engine < Rails::Engine
-    engine_name 'spree_home_promo_slider'
+    engine_name 'spree_gestpay'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -27,7 +28,7 @@ module SpreeGestpay
       #  app.config.spree.payment_methods << BillingIntegration::Gestpay
       #end    
       config.after_initialize do |app|
-        app.config.spree.payment_methods += [ BillingIntegration::Gestpay ]
+        app.config.spree.payment_methods += [ Spree::BillingIntegration::Gestpay ]
       end
       
     end

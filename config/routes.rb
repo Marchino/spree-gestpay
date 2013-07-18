@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Spree::Core::Engine.routes.draw do
   # Add your extension routes here
   match '/gestpay/show/:order_id/:payment_method_id' => 'gestpay#show', :as => :gestpay_show
   match '/gestpay/comeback(/:server)' => 'gestpay#comeback', :as => :gestpay_comeback
