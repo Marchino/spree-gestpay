@@ -50,7 +50,7 @@ module Spree
       @order = Order.find_by_number(t[:shop_transaction_id]) if t[:shop_transaction_id]
       logger.info "***GESTPAY***comeback*** Data in comeback: #{params} #{t} #{@order}"
       if t[:shop_transaction_id] and @order
-        @order.payment.started_processing
+        @order.payments.valid.last.started_processing
         case t[:transaction_result]
         when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
           flash[:error] = "Esito transazione sospeso, bonifico. #{t[:transaction_result]}"
@@ -92,15 +92,15 @@ module Spree
         logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
         case t[:transaction_result]
           when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
-            @order.payment.pend
+            @order.payments.valid.last.pend
           when "OK" # Esito transazione positivo
-            @order.payment.complete
+            @order.payments.valid.last.complete
           when "KO" # Esito transazione negativo
-            @order.payment.fail
+            @order.payments.valid.last.fail
           else # Esito transazione indefinito
             logger.info "***GESTPAY***S2S*** Esito transazione indefinito - comeback_s2s: #{params} #{t} #{@order}"
         end      
-        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
+        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payments.valid.last.inspect}"
       else
         raise "ERRORE, parametro ':shop_transaction_id' errato o assente, l'ordine number=#{t[:shop_transaction_id]} non esiste !"
       end
