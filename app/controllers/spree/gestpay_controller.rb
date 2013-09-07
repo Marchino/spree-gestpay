@@ -87,9 +87,9 @@ module Spree
       if t[:shop_transaction_id] and Order.find_by_number t[:shop_transaction_id]  
         logger.info "***GESTPAY***S2S*** comeback_s2s: #{t.inspect}"
         @order = Order.find_by_number t[:shop_transaction_id]  
-        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.inspect} #{@order.payment.inspect}"
+        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.inspect} #{@order.payments.valid.last.inspect}"
         @order.payments.valid.last.started_processing
-        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payment.inspect}"
+        logger.info "***GESTPAY***S2S*** comeback_s2s: #{@order.payments.valid.last.inspect}"
         case t[:transaction_result]
           when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
             @order.payments.valid.last.pend
