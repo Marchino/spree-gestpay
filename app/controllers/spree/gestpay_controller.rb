@@ -57,9 +57,8 @@ module Spree
           # TODO : andrebbe in realtà accettato come pagamento ma senza conferma dell'avvenuta transazione ?
           redirect_to checkout_state_url(:payment)
         when "OK" # Esito transazione positivo
-          @order.payments.valid.last.complete
-          @order.next
-          @order.save
+          @order.next!
+          @order.finalize!
           session[:order_id] = nil
           redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token}), :notice => I18n.t("gestpay_payment_success")
         when "KO" # Esito transazione negativo
