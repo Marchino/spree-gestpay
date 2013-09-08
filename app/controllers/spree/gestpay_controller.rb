@@ -59,6 +59,7 @@ module Spree
         when "OK" # Esito transazione positivo
           @order.state = 'complete'
           @order.finalize!
+          @order.payments.valid.last.complete
           session[:order_id] = nil
           redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token}), :notice => I18n.t("gestpay_payment_success")
         when "KO" # Esito transazione negativo
@@ -93,6 +94,10 @@ module Spree
           when "XX" # Esito transazione sospeso (pagamento tramite bonifico)
             @order.payments.valid.last.pend
           when "OK" # Esito transazione positivo
+            unless @order.completed?
+              @order.state = 'complete'
+              @order.finalize!
+            end
             @order.payments.valid.last.complete
           when "KO" # Esito transazione negativo
             @order.payments.valid.last.fail
